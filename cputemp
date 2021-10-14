@@ -1,0 +1,11 @@
+temp=$( cat /sys/class/thermal/thermal_zone1/temp | cut -c 1-2 )
+
+if [ "$temp" -gt "70" ]; then
+	icon="🌡"
+elif [ "$temp" -lt "30" ]; then
+	icon=""
+else
+	icon=""
+fi
+
+echo "$temp$icon℃"

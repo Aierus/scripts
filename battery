@@ -1,0 +1,22 @@
+#!/bin/bash
+
+battery_level=$(acpi -b | grep -Po '[0-9]+(?=%)')
+
+ac_power=$(acpi -b | grep "Charging")
+
+battery_full=$(acpi -b | grep -c "Full")
+
+if [ "$battery_level" -gt "70" ]; then
+	icon="🤍"
+elif [ "$battery_level" -lt "30" ]; then
+	icon="🔌"
+else
+	icon="🔋"
+fi
+
+if [[ ! -z "$ac_power" ]]
+then
+    icon="⚡"  
+fi
+
+echo "$icon$battery_level%"
